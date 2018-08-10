@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbyssProto2", "Assembly-CSharp.csproj", "{33B733EB-CB97-396C-C68D-EC91615BBC66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbyssProto2", "Assembly-CSharp-Editor.csproj", "{EB603589-F1A1-9883-A6B5-A5D1A9A71161}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33B733EB-CB97-396C-C68D-EC91615BBC66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33B733EB-CB97-396C-C68D-EC91615BBC66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33B733EB-CB97-396C-C68D-EC91615BBC66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33B733EB-CB97-396C-C68D-EC91615BBC66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB603589-F1A1-9883-A6B5-A5D1A9A71161}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB603589-F1A1-9883-A6B5-A5D1A9A71161}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB603589-F1A1-9883-A6B5-A5D1A9A71161}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB603589-F1A1-9883-A6B5-A5D1A9A71161}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
