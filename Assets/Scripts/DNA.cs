@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class DNA : MonoBehaviour {
 
+	//comment for git test
+
 	public GameObject player;
 	public List<Image> slots = new List<Image>();
 	public enum Sequences {Offensive, Defensive, Technical};
