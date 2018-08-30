@@ -7,6 +7,9 @@ public class Evolutor : MonoBehaviour {
 
 	public ParticleSystem particle;
 	public DNA dna;
+	public enum Sequences {Offensive, Defensive, Technical};
+	private List<Sequences> currentSequences = new List<Sequences>();
+	private int sequenceCount;
 
 	private PlayerState playerState;
 	private AttackAngle lastAttackAngle;
@@ -51,7 +54,7 @@ public class Evolutor : MonoBehaviour {
 		get {return _jumpCount;}
 		set {
 			_jumpCount = value;
-			if (_jumpCount >= 10) {
+			if (_jumpCount >= 2) {
 				Technical();
 				jumpCount = 0;
 			}
@@ -283,24 +286,52 @@ public class Evolutor : MonoBehaviour {
 	#region Sequence Effects
 
 	private void Offensive () {
-		dna.AddSequence(DNA.Sequences.Offensive);
+		RecordSequence(Sequences.Offensive);
 		var main = particle.main;
 		main.startColor = Color.red;
 		particle.Play();
 	}
 
 	private void Defensive () {
-		dna.AddSequence(DNA.Sequences.Defensive);
+		RecordSequence(Sequences.Defensive);
 		var main = particle.main;
 		main.startColor = Color.green;
 		particle.Play();
 	}
 
 	private void Technical () {
-		dna.AddSequence(DNA.Sequences.Technical);
+		RecordSequence(Sequences.Technical);
 		var main = particle.main;
 		main.startColor = Color.yellow;
 		particle.Play();
+	}
+
+	private void RecordSequence (Sequences sequence) {
+		dna.UpdateDNA(sequence);
+		currentSequences.Add(sequence);
+		sequenceCount++;
+		if (sequenceCount > 7) {
+			Evolve();
+			dna.Reset();
+			sequenceCount = 0;
+		}
+	}
+
+	private void Evolve() {
+		Sequences selection = currentSequences[UnityEngine.Random.Range(0, 7)];
+		CharNames nextChar = CharNames.N;
+		switch (selection) {
+			case Sequences.Offensive:
+				nextChar = CharNames.O;
+			break;
+			case Sequences.Defensive:
+				nextChar = CharNames.D;
+			break;
+			case Sequences.Technical:
+				nextChar = CharNames.T;
+			break;
+		}
+		GetComponent<PlayerStats>().EvolveUpdate (Characters.CharacterStatsDictionary[nextChar]);
 	}
 
 	#endregion
