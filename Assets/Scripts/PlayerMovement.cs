@@ -76,7 +76,11 @@ public class PlayerMovement : MonoBehaviour {
     }
 
 	private IEnumerator MoveRight () {
-		playerState.SetStateTimer(Moves.WalkRight, 5);
+		if (playerState.ReturnFlipState()) {
+			playerState.SetStateTimer(Moves.WalkLeft, 5);
+		} else {
+			playerState.SetStateTimer(Moves.WalkRight, 5);
+		}
 		if (!rightCollider.ReturnPlayerBlocked() && !rightCollider.ReturnWallBlocked()) {
 			transform.Translate(Vector2.right * Time.deltaTime * playerStats.CurrentForwardSpeed);
 			yield return null;
@@ -84,7 +88,11 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	private IEnumerator MoveLeft () {
-		playerState.SetStateTimer(Moves.WalkLeft, 5);
+		if (playerState.ReturnFlipState()) {
+			playerState.SetStateTimer(Moves.WalkRight, 5);
+		} else {
+			playerState.SetStateTimer(Moves.WalkLeft, 5);
+		}
 		if (!leftCollider.ReturnPlayerBlocked() && !leftCollider.ReturnWallBlocked()) {
 			transform.Translate(Vector2.left * Time.deltaTime * playerStats.CurrentForwardSpeed);
 			yield return null;
