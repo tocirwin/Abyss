@@ -11,7 +11,9 @@ public class HitCollider : MonoBehaviour {
 	public Moves thisMove;
 	public PlayerState playerState;
 
-
+	//
+	//Change to "player" interface that can be used for fireballs and hit/hurtboxes, instead of layers.
+	//
 	public void OnTriggerEnter2D (Collider2D collider) {
 		switch (gameObject.layer)
 		{
