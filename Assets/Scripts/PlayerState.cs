@@ -33,7 +33,7 @@ public class PlayerState : MonoBehaviour {
 		}
 	}
 
-	public void SetStateTimer (Moves move, int frames) {
+	public void SetStateTimer (Moves move, float frames) {
 		SetMoveState(move);
 		PlayerMoved(this, new EvolutionEventArgs(move));
 		stateTimer.Interval = (frames * 1000) / 60;

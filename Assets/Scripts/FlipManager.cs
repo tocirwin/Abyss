@@ -62,7 +62,6 @@ public class FlipManager : MonoBehaviour {
 	}
 
 	private IEnumerator LerpCamera (float newPos) {
-		Debug.Log (newPos);
 		Vector3 updateVector = new Vector3();
 		updateVector = mainCamera.transform.position;
 		float adjustAmount = (mainCamera.transform.position.x - newPos)/60;

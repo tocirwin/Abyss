@@ -32,37 +32,37 @@ public class PlayerAttack : MonoBehaviour {
 	}
 
 	private IEnumerator StandPunch () {
-		playerState.SetStateTimer(Moves.StandPunch, 30);
+		playerState.SetStateTimer(Moves.StandPunch, playerAnimator.ReturnAnimationFrames(Moves.StandPunch));
 		yield return null;
 	}
 
 	private IEnumerator StandKick () {
-		playerState.SetStateTimer(Moves.StandKick, 45);
+		playerState.SetStateTimer(Moves.StandKick, playerAnimator.ReturnAnimationFrames(Moves.StandKick));
 		yield return null;
 	}
 
 	private IEnumerator JumpPunch () {
-		playerState.SetStateTimer(Moves.JumpPunch, 35);
+		playerState.SetStateTimer(Moves.JumpPunch, playerAnimator.ReturnAnimationFrames(Moves.JumpPunch));
 		yield return null;
 	}
 
 	private IEnumerator JumpKick () {
-		playerState.SetStateTimer(Moves.JumpKick, 40);
+		playerState.SetStateTimer(Moves.JumpKick, playerAnimator.ReturnAnimationFrames(Moves.JumpKick));
 		yield return null;
 	}
 
 	private IEnumerator CrouchPunch () {
-		playerState.SetStateTimer(Moves.CrouchPunch, 35);
+		playerState.SetStateTimer(Moves.CrouchPunch, playerAnimator.ReturnAnimationFrames(Moves.CrouchPunch));
 		yield return null;
 	}
 
 	private IEnumerator CrouchKick () {
-		playerState.SetStateTimer(Moves.CrouchKick, 50);
+		playerState.SetStateTimer(Moves.CrouchKick, playerAnimator.ReturnAnimationFrames(Moves.CrouchKick));
 		yield return null;
 	}
 
 	private IEnumerator Fireball () {
-		playerState.SetStateTimer(Moves.Fireball, 35);
+		playerState.SetStateTimer(Moves.Fireball, playerAnimator.ReturnAnimationFrames(Moves.Fireball));
 		yield return new WaitForSeconds(0.2f);
 		GameObject projectile = Instantiate(fireball, new Vector3(transform.position.x + 100, transform.position.y - 50, -11), Quaternion.identity);
 		projectile.GetComponent<Fireball>().speed.x *= fireballSpeed;
@@ -80,7 +80,7 @@ public class PlayerAttack : MonoBehaviour {
 		if (playerState.ReturnFlipState()) {
 			travelRate = new Vector3(-3, 10, 0);
 		}
-		playerState.SetStateTimer(Moves.DragonPunch, 80);
+		playerState.SetStateTimer(Moves.DragonPunch, playerAnimator.ReturnAnimationFrames(Moves.DragonPunch));
 		yield return new WaitForSeconds(0.1f);
 		for (int i = 0; i < 30; i++)
         {
@@ -101,7 +101,7 @@ public class PlayerAttack : MonoBehaviour {
 		if (playerState.ReturnFlipState()) {
 			travelRate = new Vector3(-10, 0, 0);
 		}
-		playerState.SetStateTimer(Moves.Tatsu, 90);
+		playerState.SetStateTimer(Moves.Tatsu, playerAnimator.ReturnAnimationFrames(Moves.Tatsu));
 		for (int i = 0; i < 90; i++)
         {
             transform.position += travelRate;
