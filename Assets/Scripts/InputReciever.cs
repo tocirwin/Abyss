@@ -52,6 +52,11 @@ public class InputReciever : MonoBehaviour {
 				InputReleased(this, args);
 			}
 		}
+
+		if (Input.GetButtonDown("Left")) {
+			Debug.Log("Left detected");
+		}
+
 	}
 
 	public List<KeyCode> ReturnRecordedKeys () {
