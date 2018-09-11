@@ -27,26 +27,26 @@ public static class Enums : object {
         {Moves.DragonPunch, new Moves[]{Moves.None}}
     };
 
-    public static Dictionary<KeyCode, Dictionary<Moves, Moves>> KeysAndMovesDict = new Dictionary<KeyCode, Dictionary<Moves, Moves>>()
+    public static Dictionary<string, Dictionary<Moves, Moves>> KeysAndMovesDict = new Dictionary<string, Dictionary<Moves, Moves>>()
     {
-        {KeyCode.A, new Dictionary<Moves, Moves>{
+        {"Left", new Dictionary<Moves, Moves>{
             {Moves.WalkLeft, Moves.WalkLeft}, {Moves.WalkRight, Moves.WalkLeft}, {Moves.Crouch, Moves.CrouchLeft},
             {Moves.CrouchLeft, Moves.CrouchLeft}, {Moves.CrouchRight, Moves.CrouchLeft}, {Moves.Idle, Moves.WalkLeft}}},
-        {KeyCode.D, new Dictionary<Moves, Moves>{
+        {"Right", new Dictionary<Moves, Moves>{
             {Moves.WalkLeft, Moves.WalkRight}, {Moves.WalkRight, Moves.WalkRight}, {Moves.Crouch, Moves.CrouchRight},
             {Moves.CrouchLeft, Moves.CrouchRight}, {Moves.CrouchRight, Moves.CrouchRight}, {Moves.Idle, Moves.WalkRight}}},
-        {KeyCode.W, new Dictionary<Moves, Moves>{
+        {"Up", new Dictionary<Moves, Moves>{
             {Moves.WalkLeft, Moves.JumpNeutral}, {Moves.WalkRight, Moves.JumpNeutral}, {Moves.Idle, Moves.JumpNeutral},
             }},
-        {KeyCode.S, new Dictionary<Moves, Moves>{
+        {"Down", new Dictionary<Moves, Moves>{
             {Moves.WalkLeft, Moves.Crouch}, {Moves.WalkRight, Moves.Crouch}, {Moves.Idle, Moves.Crouch},
             {Moves.Crouch, Moves.Crouch}, {Moves.CrouchLeft, Moves.CrouchLeft}, {Moves.CrouchRight, Moves.CrouchRight},
             }},
-        {KeyCode.Mouse0, new Dictionary<Moves, Moves>{
+        {"Punch", new Dictionary<Moves, Moves>{
             {Moves.WalkLeft, Moves.StandPunch}, {Moves.WalkRight, Moves.StandPunch}, {Moves.Idle, Moves.StandPunch},
             {Moves.Crouch, Moves.CrouchPunch}, {Moves.CrouchLeft, Moves.CrouchPunch}, {Moves.CrouchRight, Moves.CrouchPunch}, 
             {Moves.JumpNeutral, Moves.JumpPunch}, {Moves.JumpLeft, Moves.JumpPunch}, {Moves.JumpRight, Moves.JumpPunch}}},
-        {KeyCode.Mouse1, new Dictionary<Moves, Moves>{
+        {"Kick", new Dictionary<Moves, Moves>{
             {Moves.WalkLeft, Moves.StandKick}, {Moves.WalkRight, Moves.StandKick}, {Moves.Idle, Moves.StandKick},
             {Moves.Crouch, Moves.CrouchKick}, {Moves.CrouchLeft, Moves.CrouchKick}, {Moves.CrouchRight, Moves.CrouchKick}, 
             {Moves.JumpNeutral, Moves.JumpKick}, {Moves.JumpLeft, Moves.JumpKick}, {Moves.JumpRight, Moves.JumpKick}}}
@@ -98,7 +98,7 @@ public static class Enums : object {
 
 public static class MoveKeyStates : object {
 
-public static Moves MoveStateOutcome (KeyCode key, Moves current) {
+public static Moves MoveStateOutcome (string key, Moves current) {
     Dictionary<Moves, Moves> possibleMoves = Enums.KeysAndMovesDict[key];
     if (possibleMoves.ContainsKey(current)) {
         return possibleMoves[current];

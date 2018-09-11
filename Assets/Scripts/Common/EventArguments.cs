@@ -8,7 +8,7 @@ public class EventArguments : MonoBehaviour {
 }
 
 public class InputEventArgs : EventArgs {
-	public KeyCode pressedKey;
+	public string pressedKey;
 	public int KeyIndex;
 }
 

@@ -7,23 +7,24 @@ public class InputReciever : MonoBehaviour {
 
 	public event EventHandler<InputEventArgs> InputDetected;
 	public event EventHandler<InputEventArgs> InputReleased;
-	private KeyCode[] ValidKeys = new KeyCode[] {KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.Mouse0, KeyCode.Mouse1};
-	private KeyCode[] ValidMoveKeys = new KeyCode[] {KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D};
-	private KeyCode[] ValidAttackKeys = new KeyCode[] {KeyCode.Mouse0, KeyCode.Mouse1};
-	public static List<KeyCode> recordedKeys = new List<KeyCode>();
-	
+
+	private string[] ValidKeys = new string[] {"Up", "Left", "Right", "Down", "Punch", "Kick"};
+	private string[] ValidMoveKeys = new string[] {"Up", "Left", "Right", "Down"};
+	private string[] ValidAttackKeys = new string[] {"Punch", "Kick"};
+	public static List<string> recordedKeys = new List<string>();
+
 	void Awake () {
 		for (int i = 0; i < 30; i++) {
-			recordedKeys.Add(KeyCode.None);
+			recordedKeys.Add("None");
 		}
 	}
 
 	// Update is called once per frame
 	void Update () {
 		if (Input.anyKey) {
-			foreach (KeyCode key in ValidMoveKeys)
+			foreach (string key in ValidMoveKeys)
 			{
-				if (Input.GetKey(key)) {
+				if (Input.GetButton(key)) {
 					recordedKeys.Add(key);
 					InputEventArgs args = new InputEventArgs();
 					args.pressedKey = key;
@@ -31,8 +32,8 @@ public class InputReciever : MonoBehaviour {
 					InputDetected(this, args);
 				}
 			}
-			foreach (KeyCode key in ValidAttackKeys) {
-				if (Input.GetKeyDown(key)) {
+			foreach (string key in ValidAttackKeys) {
+				if (Input.GetButton(key)) {
 					recordedKeys.Add(key);
 					InputEventArgs args = new InputEventArgs();
 					args.pressedKey = key;
@@ -41,25 +42,21 @@ public class InputReciever : MonoBehaviour {
 				}
 			}
 		} else {
-			recordedKeys.Add(KeyCode.None);
+			recordedKeys.Add("None");
 		}
 
 		for (int i = 0; i < ValidKeys.Length; i++)
 		{
-			if (Input.GetKeyUp(ValidKeys[i])) {
+			if (Input.GetButtonUp(ValidKeys[i])) {
 				InputEventArgs args = new InputEventArgs();
 				args.pressedKey = ValidKeys[i];
 				InputReleased(this, args);
 			}
 		}
 
-		if (Input.GetButtonDown("Left")) {
-			Debug.Log("Left detected");
-		}
-
 	}
 
-	public List<KeyCode> ReturnRecordedKeys () {
+	public List<string> ReturnRecordedKeys () {
 		return recordedKeys;
 	}
 

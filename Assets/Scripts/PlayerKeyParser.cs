@@ -9,7 +9,7 @@ public class PlayerKeyParser : MonoBehaviour {
 	public InputReciever inputReciever;
 	public AIKeys aIKeys;
 	public PlayerState playerState;
-	private Func<List<KeyCode>> returnKeys;
+	private Func<List<string>> returnKeys;
 
 	private void Start () {
 		if (inputReciever) {
@@ -30,12 +30,12 @@ public class PlayerKeyParser : MonoBehaviour {
 		playerState.InvokeMove(ParseKey(e.pressedKey, e.KeyIndex));
 	}
 
-	private Moves ParseKey (KeyCode key, int index) {
+	private Moves ParseKey (string key, int index) {
 		Moves currentMove = playerState.ReturnMoveState();
 		Moves returnedMove;
 		switch (key)
 		{
-			case KeyCode.Mouse0:
+			case "Punch":
 				if (CheckDragonPunch(index)) {
 					returnedMove = MoveKeyStates.MoveStateSpecialOutcome(Moves.DragonPunch, currentMove);
 					return returnedMove;
@@ -43,7 +43,7 @@ public class PlayerKeyParser : MonoBehaviour {
 					returnedMove = MoveKeyStates.MoveStateSpecialOutcome(Moves.Fireball, currentMove);
 					return returnedMove;
 				} else { goto default; }
-			case KeyCode.Mouse1:
+			case "Kick":
 				if (CheckTatsu(index)) {
 					returnedMove = MoveKeyStates.MoveStateSpecialOutcome(Moves.Tatsu, currentMove);
 					return returnedMove;
@@ -55,19 +55,19 @@ public class PlayerKeyParser : MonoBehaviour {
 	}
 
 	private bool CheckFireball (int index) {
-		KeyCode toward = KeyCode.D;
+		string toward = "Right";
 		if (!playerState.ReturnFlipState()) {
-			toward = KeyCode.D;
+			toward = "Right";
 		} else if (playerState.ReturnFlipState()) {
-			toward = KeyCode.A;
+			toward = "Left";
 		}
-		List<KeyCode> keys = returnKeys();
+		List<string> keys = returnKeys();
 		for (int i = index; i > index - frameBuffer; i--)
 		{
 			if (keys[i] == toward) {
 				for (int m = i; m > index - frameBuffer; m--)
 				{
-					if (keys[m] == KeyCode.S) {
+					if (keys[m] == "Down") {
 						return true;
 					}
 				}
@@ -77,19 +77,19 @@ public class PlayerKeyParser : MonoBehaviour {
 	}
 
 	private bool CheckDragonPunch (int index) {
-		KeyCode toward = KeyCode.D;
+		string toward = "Right";
 		if (!playerState.ReturnFlipState()) {
-			toward = KeyCode.D;
+			toward = "Right";
 		} else if (playerState.ReturnFlipState()) {
-			toward = KeyCode.A;
+			toward = "Left";
 		}
-		List<KeyCode> keys = returnKeys();
+		List<string> keys = returnKeys();
 		for (int i = index; i > index - frameBuffer; i--)
 		{
 			if (keys[i] == toward) {
 				for (int m = i; m > index - frameBuffer; m--)
 				{
-					if (keys[m] == KeyCode.S) {
+					if (keys[m] == "Down") {
 						for (int s = m; s > index - frameBuffer; s--)
 						{
 							if (keys[s] == toward) {
@@ -104,19 +104,19 @@ public class PlayerKeyParser : MonoBehaviour {
 	}
 
 	private bool CheckTatsu (int index) {
-		KeyCode away = KeyCode.D;
+		string away = "Left";
 		if (!playerState.ReturnFlipState()) {
-			away = KeyCode.A;
+			away = "Left";
 		} else if (playerState.ReturnFlipState()) {
-			away = KeyCode.D;
+			away = "Right";
 		}
-		List<KeyCode> keys = returnKeys();
+		List<string> keys = returnKeys();
 		for (int i = index; i > index - frameBuffer; i--)
 		{
 			if (keys[i] == away) {
 				for (int m = i; m > index - frameBuffer; m--)
 				{
-					if (keys[m] == KeyCode.S) {
+					if (keys[m] == "Down") {
 						return true;
 					}
 				}
@@ -126,14 +126,14 @@ public class PlayerKeyParser : MonoBehaviour {
 	}
 
 	private void CheckThrow (int index) {
-		List<KeyCode> keys = returnKeys();
+		List<string> keys = returnKeys();
 	}
 
-	private List<KeyCode> ReturnPlayerKeys () {
+	private List<string> ReturnPlayerKeys () {
 		return inputReciever.ReturnRecordedKeys();
 	}
 
-	private List<KeyCode> ReturnAIKeys () {
+	private List<string> ReturnAIKeys () {
 		return aIKeys.ReturnRecordedKeys();
 	}
 

@@ -5,16 +5,16 @@ using System;
 
 public class AIKeys : MonoBehaviour {
 
-	private KeyCode[] ValidKeys = new KeyCode[] {KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.Mouse0, KeyCode.Mouse1};
-	public static List<KeyCode> recordedKeys = new List<KeyCode>();
-	private List<KeyCode> nextKeys = new List<KeyCode>();
+	private string[] ValidKeys = new string[] {"Up", "Down", "Left", "Right", "Punch", "Kick"};
+	public static List<string> recordedKeys = new List<string>();
+	private List<string> nextKeys = new List<string>();
 	private int nextKey = 0;
 
 	public event EventHandler<InputEventArgs> ArtificialInputDetected;
 
 	void Awake () {
 		for (int i = 0; i < 30; i++) {
-			recordedKeys.Add(KeyCode.None);
+			recordedKeys.Add("None");
 		}
 	}
 
@@ -23,43 +23,43 @@ public class AIKeys : MonoBehaviour {
 		switch (rolledKey) {
 			case 0:
 			for (int i = 0; i < 30; i++) {
-				nextKeys.Add(KeyCode.A);
+				nextKeys.Add("Left");
 			}
 			break;
 			case 1:
 			for (int i = 0; i < 30; i++) {
-				nextKeys.Add(KeyCode.D);
+				nextKeys.Add("Right");
 			}
 			break;
 			case 2:
 			for (int i = 0; i < 5; i++) {
-				nextKeys.Add(KeyCode.S);
+				nextKeys.Add("Down");
 			}
 			break;
 			case 3:
 			for (int i = 0; i < 5; i++) {
-				nextKeys.Add(KeyCode.W);
+				nextKeys.Add("Up");
 			}
 			break;
 			case 4:
 			for (int i = 0; i < 2; i++) {
-				nextKeys.Add(KeyCode.Mouse0);
+				nextKeys.Add("Punch");
 			}
 			break;
 			case 5:
 			for (int i = 0; i < 2; i++) {
-				nextKeys.Add(KeyCode.Mouse1);
+				nextKeys.Add("Kick");
 			}
 			break;
 			case 6:
-				nextKeys.Add(KeyCode.S);
-				nextKeys.Add(KeyCode.D);
-				nextKeys.Add(KeyCode.Mouse0);
+				nextKeys.Add("Down");
+				nextKeys.Add("Right");
+				nextKeys.Add("Punch");
 			break;
 			case 7:
-				nextKeys.Add(KeyCode.S);
-				nextKeys.Add(KeyCode.A);
-				nextKeys.Add(KeyCode.Mouse0);
+				nextKeys.Add("Down");
+				nextKeys.Add("Left");
+				nextKeys.Add("Kick");
 			break;
 		}
 
@@ -67,7 +67,7 @@ public class AIKeys : MonoBehaviour {
 		nextKey++;
 	}
 
-	private void SendKey (KeyCode key) {
+	private void SendKey (string key) {
 		recordedKeys.Add(key);
 		InputEventArgs args = new InputEventArgs();
 		args.pressedKey = key;
@@ -75,7 +75,7 @@ public class AIKeys : MonoBehaviour {
 		ArtificialInputDetected(this, args);
 	}
 
-	public List<KeyCode> ReturnRecordedKeys () {
+	public List<string> ReturnRecordedKeys () {
 		return recordedKeys;
 	}
 
