@@ -20,7 +20,7 @@ public class PlayerAnimator : MonoBehaviour {
 	public float ReturnAnimationFrames (Moves move) {
 		for (int i = 0; i < ac.animationClips.Length; i++) {
 			if (ac.animationClips[i].name == move.ToString()) {
-				Debug.Log (move.ToString() + " : " + ac.animationClips[i].length * 60);
+				//Debug.Log (move.ToString() + " : " + ac.animationClips[i].length * 60);
 				return ac.animationClips[i].length * 60;
 			}
 		}

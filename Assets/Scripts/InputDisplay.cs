@@ -32,7 +32,7 @@ public class InputDisplay : MonoBehaviour {
 	}
 
 	public void OnInputDetected (object sender, InputEventArgs e) {
-		DisplayKey(e.pressedKey, true);
+			DisplayKey(e.pressedKey, true);
 	}
 
 	public void OnInputReleased (object sender, InputEventArgs e) {
