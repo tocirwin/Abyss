@@ -5,6 +5,11 @@ using System;
 
 public class InputReciever : MonoBehaviour {
 
+	public string haxis;
+	public string vaxis;
+	public string punch;
+	public string kick;
+
 	public event EventHandler<InputEventArgs> InputDetected;
 	public event EventHandler<InputEventArgs> InputReleased;
 
@@ -25,36 +30,34 @@ public class InputReciever : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		CheckButtonUp();
-		if (Input.GetAxisRaw("Horizontal") < -axisBuffer) {
+		if (Input.GetAxisRaw(haxis) < -axisBuffer) {
 			enteredKey = "Left";
 			leftActive = true;
 		}
-		if (Input.GetAxisRaw("Horizontal") > axisBuffer) {
+		if (Input.GetAxisRaw(haxis) > axisBuffer) {
 			enteredKey = "Right";
 			rightActive = true;
 		}
-		if (Input.GetAxisRaw("Vertical") < -axisBuffer) {
+		if (Input.GetAxisRaw(vaxis) < -axisBuffer) {
 			enteredKey = "Up";
 			upActive = true;
 		}
-		if (Input.GetAxisRaw("Vertical") > axisBuffer) {
+		if (Input.GetAxisRaw(vaxis) > axisBuffer) {
 			enteredKey = "Down";
 			downActive = true;
 		}
-		if (Input.GetButton("Punch")) {
+		if (Input.GetButton(punch)) {
 			enteredKey = "Punch";
 		}
-		if (Input.GetButton("Kick")) {
+		if (Input.GetButton(kick)) {
 			enteredKey = "Kick";
 		}
 		SendKeyEvent(enteredKey);
 		enteredKey = "None";
-		Debug.Log("Horizontal: " + Input.GetAxisRaw("Horizontal"));
-		Debug.Log("Vertical: " + Input.GetAxisRaw("Vertical"));
 	}
 
 	private void CheckButtonUp () {
-		if (Math.Abs(Input.GetAxisRaw("Horizontal")) < 1f) {
+		if (Math.Abs(Input.GetAxisRaw(haxis)) < 1f) {
 			if (leftActive) {
 				SendKeyDownEvent("Left");
 				leftActive = false;
@@ -64,7 +67,7 @@ public class InputReciever : MonoBehaviour {
 				rightActive = false;
 			}
 		}
-		if (Math.Abs(Input.GetAxisRaw("Vertical")) < 1f) {
+		if (Math.Abs(Input.GetAxisRaw(vaxis)) < 1f) {
 			if (upActive) {
 				SendKeyDownEvent("Up");
 				upActive = false;
@@ -74,17 +77,17 @@ public class InputReciever : MonoBehaviour {
 				downActive = false;
 			}
 		}
-		if (Input.GetButtonUp("Kick")) {
+		if (Input.GetButtonUp(kick)) {
 			SendKeyDownEvent("Kick");
 		}
-		if (Input.GetButtonUp("Punch")) {
+		if (Input.GetButtonUp(punch)) {
 			SendKeyDownEvent("Punch");
 		}
 	}
 
 	private void SendKeyEvent (string key) {
+		recordedKeys.Add(key);
 		if (key != "None") {
-			recordedKeys.Add(key);
 			InputEventArgs args = new InputEventArgs();
 			args.pressedKey = key;
 			args.KeyIndex = recordedKeys.Count - 1;
