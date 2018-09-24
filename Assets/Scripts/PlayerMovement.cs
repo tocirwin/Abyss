@@ -8,6 +8,10 @@ public class PlayerMovement : MonoBehaviour {
 	private PlayerAnimator playerAnimator;
 	private PlayerState playerState;
 	private PlayerStats playerStats;
+	private InputReciever inputReciever;
+	private string haxis;
+	private string vaxis;
+	private float axisBuffer;
 	public MoveCollider leftCollider;
 	public MoveCollider rightCollider;
 
@@ -19,9 +23,13 @@ public class PlayerMovement : MonoBehaviour {
 		playerAnimator = GetComponent<PlayerAnimator>();
 		playerState = GetComponent<PlayerState>();
 		playerStats = GetComponent<PlayerStats>();
+		inputReciever = GetComponent<InputReciever>();
 	}
 
 	void Start () {
+		haxis = inputReciever.haxis;
+		vaxis = inputReciever.vaxis;
+		axisBuffer = inputReciever.axisBuffer;
 		functions.Add(Moves.JumpNeutral, Jump);
 		functions.Add(Moves.JumpLeft, Jump);
 		functions.Add(Moves.JumpRight, Jump);
@@ -40,12 +48,12 @@ public class PlayerMovement : MonoBehaviour {
 	private IEnumerator Jump() {
 		Vector2 up = new Vector2(0, playerStats.CurrentJumpHeight);
 		Vector2 down = new Vector2(0, -playerStats.CurrentJumpHeight);
-		if (Input.GetKey(KeyCode.A)) {
+		if (Input.GetAxis(haxis) < -axisBuffer) {
 			playerState.SetStateTimer(Moves.JumpLeft, 75);
 			up.x = -playerStats.CurrentJumpDistance;
 			down.x = -playerStats.CurrentJumpDistance;
 		}
-		else if (Input.GetKey(KeyCode.D)) {
+		else if (Input.GetAxis(haxis) > axisBuffer) {
 			playerState.SetStateTimer(Moves.JumpRight, 75);
 			up.x = playerStats.CurrentJumpDistance;
 			down.x = playerStats.CurrentJumpDistance;
@@ -100,9 +108,9 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	private IEnumerator Crouch () {
-		if (Input.GetKey(KeyCode.A)) {
+		if (Input.GetAxis(haxis) < - axisBuffer) {
 			playerState.SetStateTimer(Moves.CrouchLeft, 3);
-		} else if (Input.GetKey(KeyCode.D)) {
+		} else if (Input.GetAxis(haxis) > axisBuffer) {
 			playerState.SetStateTimer(Moves.CrouchRight, 3);
 		} else {
 			playerState.SetStateTimer(Moves.Crouch, 3);

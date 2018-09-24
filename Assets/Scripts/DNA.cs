@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class DNA : MonoBehaviour {
 
 	public List<Image> slots = new List<Image>();
-	private int sequenceCount = 0;
+	public int sequenceCount = 0;
 
 	void Start () {
 		Reset();

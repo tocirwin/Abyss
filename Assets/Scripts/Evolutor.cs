@@ -9,7 +9,7 @@ public class Evolutor : MonoBehaviour {
 	public DNA dna;
 	public enum Sequences {Offensive, Defensive, Technical};
 	private List<Sequences> currentSequences = new List<Sequences>();
-	private int sequenceCount;
+	public int sequenceCount;
 
 	private PlayerState playerState;
 	private AttackAngle lastAttackAngle;

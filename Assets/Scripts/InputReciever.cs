@@ -17,7 +17,7 @@ public class InputReciever : MonoBehaviour {
 	public bool downActive;
 	public bool leftActive;
 	public bool rightActive;
-	private float axisBuffer = 0.75f;
+	public float axisBuffer = 0.75f;
 	public static List<string> recordedKeys = new List<string>();
 	string enteredKey = "None";
 
