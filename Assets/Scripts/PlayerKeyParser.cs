@@ -5,7 +5,7 @@ using System;
 
 public class PlayerKeyParser : MonoBehaviour {
 
-	private int frameBuffer = 15;
+	private int frameBuffer = 20;
 	public InputReciever inputReciever;
 	public AIKeys aIKeys;
 	public PlayerState playerState;
@@ -87,6 +87,7 @@ public class PlayerKeyParser : MonoBehaviour {
 		for (int i = index; i > index - frameBuffer; i--)
 		{
 			if (keys[i] == toward) {
+				Debug.Log("Toward 1");
 				for (int m = i; m > index - frameBuffer; m--)
 				{
 					if (keys[m] == "Down") {
@@ -94,6 +95,7 @@ public class PlayerKeyParser : MonoBehaviour {
 						{
 							if (keys[s] == toward) {
 								return true;
+								Debug.Log("Return True");
 							}
 						}
 					}

@@ -46,10 +46,10 @@ public class InputReciever : MonoBehaviour {
 			enteredKey = "Down";
 			downActive = true;
 		}
-		if (Input.GetButton(punch)) {
+		if (Input.GetButtonDown(punch)) {
 			enteredKey = "Punch";
 		}
-		if (Input.GetButton(kick)) {
+		if (Input.GetButtonDown(kick)) {
 			enteredKey = "Kick";
 		}
 		SendKeyEvent(enteredKey);

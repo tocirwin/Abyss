@@ -49,17 +49,17 @@ public class PlayerMovement : MonoBehaviour {
 		Vector2 up = new Vector2(0, playerStats.CurrentJumpHeight);
 		Vector2 down = new Vector2(0, -playerStats.CurrentJumpHeight);
 		if (Input.GetAxis(haxis) < -axisBuffer) {
-			playerState.SetStateTimer(Moves.JumpLeft, 75);
+			playerState.SetStateTimer(Moves.JumpLeft, 60);
 			up.x = -playerStats.CurrentJumpDistance;
 			down.x = -playerStats.CurrentJumpDistance;
 		}
 		else if (Input.GetAxis(haxis) > axisBuffer) {
-			playerState.SetStateTimer(Moves.JumpRight, 75);
+			playerState.SetStateTimer(Moves.JumpRight, 60);
 			up.x = playerStats.CurrentJumpDistance;
 			down.x = playerStats.CurrentJumpDistance;
 		}
 		else {
-			playerState.SetStateTimer(Moves.JumpNeutral, 75);
+			playerState.SetStateTimer(Moves.JumpNeutral, 60);
 		}
 
         for (int i = 0; i < playerStats.CurrentJumpDuration; i++)
@@ -71,7 +71,7 @@ public class PlayerMovement : MonoBehaviour {
             transform.position += ((Vector3)up);
             yield return null;
         }
-        yield return new WaitForSeconds(0.1f);
+        //yield return new WaitForSeconds(0.1f);
         for (int i = 0; i < playerStats.CurrentJumpDuration; i++)
         {
 			if (leftCollider.ReturnWallBlocked() || rightCollider.ReturnWallBlocked()) {
